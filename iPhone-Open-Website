@@ -1,0 +1,11 @@
+DELAY 1000
+GUI SPACE
+DELAY 500
+STRING safari
+DELAY 500
+ENTER
+DELAY 2500
+REM Insert your website below :)
+STRING www.cornelcaba.com
+DELAY 500
+ENTER
